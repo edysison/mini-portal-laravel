@@ -15,10 +15,10 @@ class IsEditor
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->check() && $request->user()->role == 'editor'){
+        if(auth()->check() && $request->user()->role == 'editor' && $request->user()->active == 1){
             return $next($request);            
         }else{
-            return redirect()->guest('home');
+            return redirect('/');
         }
     }
 }
