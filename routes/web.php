@@ -11,10 +11,24 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/home', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('admin')->name('admin.')->middleware('web','auth','auth.admin')->group(function(){
+    Route::get('/', 'AdminController@index')->name('dashboard');
+    Route::prefix('editor')->name('editor.')->group(function(){
+        Route::get('/view', 'AdminController@editorView')->name('view');
+        Route::get('/edit', 'AdminController@editorEdit')->name('edit');
+        Route::get('/update', 'AdminController@editorUpdate')->name('update');
+        Route::get('/delete', 'AdminController@editorDelete')->name('delete');    
+    }); 
+});
+
+Route::prefix('editor')->name('editor.')->middleware('web','auth','auth.editor')->group(function(){
+    Route::get('/', 'EditorController@index')->name('dashboard');
+});
