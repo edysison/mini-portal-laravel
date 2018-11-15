@@ -34,4 +34,12 @@ Route::prefix('admin')->name('admin.')->middleware('web','auth','auth.admin')->g
 
 Route::prefix('editor')->name('editor.')->middleware('web','auth','auth.editor')->group(function(){
     Route::get('/', 'EditorController@index')->name('dashboard');
+    Route::prefix('post')->name('post.')->group(function(){
+        Route::get('/', 'EditorController@index');
+        Route::get('/view', 'EditorController@postView')->name('view');
+        Route::get('/edit', 'EditorController@postEdit')->name('edit');
+        Route::post('/update', 'EditorController@postUpdate')->name('update');
+        Route::post('/add', 'EditorController@postAdd')->name('add');
+        Route::get('/delete', 'EditorController@postDelete')->name('delete');    
+    }); 
 });

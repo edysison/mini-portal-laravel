@@ -35,8 +35,6 @@
                                 @endif
 
                                 <h2>Sucess!</h2>
-                                <h4>Thank you for join us!</h4>
-                                <p>Now your registration will be validated by our professionals and after that you will be able to enjoy all the functionalities of our platform!</p>
                             </div>
                         </div>
                     </div>
