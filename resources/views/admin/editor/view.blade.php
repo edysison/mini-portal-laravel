@@ -21,10 +21,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($user->posts as $post)
                             <tr>
-                                <th>1</th>
-                                <th>Test</th>
+                                <th>{{$post->id}}</th>
+                                <th>{{$post->title}}</th>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

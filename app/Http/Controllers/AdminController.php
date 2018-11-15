@@ -12,7 +12,7 @@ class AdminController extends Controller
         return view('admin.home')->with('users',$users);
     }
     function editorView(Request $request){
-        $user = User::where('id',$request->id)->first();
+        $user = User::where('id',$request->id)->with('posts')->first();
         return view('admin.editor.view')->with('user',$user);
     }
     function editorEdit(Request $request){
@@ -33,7 +33,10 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
     function editorDelete(Request $request){
-        $user = User::where('id',$request->id)->first();
+        $user = User::where('id',$request->id)->with('posts')->first();
+        if(isset($user->posts)){
+            return redirect()->route('admin.dashboard');            
+        }
         $user->delete();
         return redirect()->route('admin.dashboard');
     }
