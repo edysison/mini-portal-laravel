@@ -12,21 +12,29 @@ class AdminController extends Controller
         return view('admin.home')->with('users',$users);
     }
     function editorView(Request $request){
-        $users = User::where('id',$request->id)->first();
-        return view('admin.editor.view')->with('users',$users);
+        $user = User::where('id',$request->id)->first();
+        return view('admin.editor.view')->with('user',$user);
     }
     function editorEdit(Request $request){
-        $users = User::where('id',$request->id)->first();
-        return view('admin.editor.edit')->with('users',$users);
+        $user = User::where('id',$request->id)->first();
+        return view('admin.editor.edit')->with('user',$user);
     }
     function editorUpdate(Request $request){
-        $users = User::where('id',$request->id)->first();
+        $user = User::where('id',$request->id)->first();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->cpf = $request->cpf;
-        $user->active = $request->active;
+        if(isset($request->active)){
+            $user->active = 1;
+        }else{
+            $user->active = 0;
+        }
+        $user->save();
+        return redirect()->route('admin.dashboard');
     }
     function editorDelete(Request $request){
-
+        $user = User::where('id',$request->id)->first();
+        $user->delete();
+        return redirect()->route('admin.dashboard');
     }
 }

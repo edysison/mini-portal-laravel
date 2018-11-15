@@ -18,6 +18,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>CPF</th>
                                 <th>Email</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -27,6 +28,7 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->cpf }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->access() }}</td>
                                     <td>

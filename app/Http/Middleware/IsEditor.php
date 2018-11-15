@@ -18,7 +18,6 @@ class IsEditor
         if(auth()->check() && $request->user()->role == 'editor'){
             return $next($request);            
         }else{
-            dd("test");
             return redirect()->guest('home');
         }
     }

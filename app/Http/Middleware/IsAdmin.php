@@ -18,8 +18,7 @@ class IsAdmin
         if(auth()->check() && $request->user()->role == 'admin'){
             return $next($request);            
         }else{
-            dd($request->user()->role);
-            return redirect()->guest('home');
+            return redirect()->guest('editor');
         }
     }
 }

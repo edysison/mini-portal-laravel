@@ -15,7 +15,7 @@ class AddRoleToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('role', ['admin', 'editor'])->default('editor');
-            $table->boolean('cpf')->unique();
+            $table->string('cpf')->unique();
             $table->boolean('active')->default(0);
         });
     }

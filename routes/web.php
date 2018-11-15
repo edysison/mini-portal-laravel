@@ -17,14 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'HomeController@index');
+Route::get('/thankyou', function () {
+    return view('thankyou');
+});
 
 Route::prefix('admin')->name('admin.')->middleware('web','auth','auth.admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('dashboard');
     Route::prefix('editor')->name('editor.')->group(function(){
+        Route::get('/', 'AdminController@index');
         Route::get('/view', 'AdminController@editorView')->name('view');
         Route::get('/edit', 'AdminController@editorEdit')->name('edit');
-        Route::get('/update', 'AdminController@editorUpdate')->name('update');
+        Route::post('/update', 'AdminController@editorUpdate')->name('update');
         Route::get('/delete', 'AdminController@editorDelete')->name('delete');    
     }); 
 });
